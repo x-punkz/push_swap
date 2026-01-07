@@ -13,7 +13,7 @@
 /*
 # Passo a Passo
 **1- Verificar dados de entrada**
-[] Verificar duplicadas
+[x] Verificar duplicadas
 [] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
 [x] Verificar se todos os inputs são de fatos números
 [] Argv[1] sera o topo da lista
@@ -44,6 +44,7 @@ char *append_str(char **argv)
 	{
 		if (ft_strchr(temp, *argv[i]) || !ft_isdigit(*argv[i]))
 			return ("erro");
+		//vericar se o valor entre os " " é igual a entrada do argv
 		str2 = ft_strjoin(argv[i], " ");
 		old = temp;
 		temp = ft_strjoin(old, str2);
