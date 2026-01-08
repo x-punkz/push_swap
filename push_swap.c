@@ -13,25 +13,73 @@
 /*
 # Passo a Passo
 **1- Verificar dados de entrada**
-[x] Verificar duplicadas
-[] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
+[ ] Verificar duplicadas
+[x] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
 [x] Verificar se todos os inputs são de fatos números
-[] Argv[1] sera o topo da lista
+[] Argv[1] sera o topo da lista:
 
 *ATENÇÃO*: Se for encontrado caracteres inválidos ou duplicadas retornar error adequadamente.
 
 [] Transformar os dados de entrada de tipo char* para int
 
-Colocar os números int dentro de uma pilha(lista encadeada)
+[] Colocar os números int dentro de uma pilha(lista encadeada)
 
 * Os erros incluem, por exemplo:
-   alguns argumentos não serem inteiros
-   alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
+ [] alguns argumentos não serem inteiros
+ [] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
 */
 #include "LIBFT/libft.h"
 #include <stdio.h>
+int	ft_Atoi(const char *nptr)
+{
+	int	i;
+	int	flag;
+	int	result;
+
+	i = 0;
+	flag = 0;
+	result = 0;
+	while ((nptr[i] >= 7 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '+')
+			flag = 1;
+		else
+			flag = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + (nptr[i] - 48);
+		i++;
+	}
+	if (flag == -1)
+		return (result * flag);
+	return (result);
+}
+
+static int	verify(char *arg)
+{
+	int	i;
+	int	argx;
+
+	i = 0;
+	argx = ft_Atoi(arg);
+	if (printf("%d teste\n", argx) < -2147483647 || argx > 2147483647)
+		return (1);
+	while (arg[i])
+	{
+		if (arg[i] == '+' || arg[i] == '-')
+			i++;
+		if (!ft_isdigit(arg[i]))
+			return (1);
+		i++;
+	}
+	return(0);
+}
 /*Acrescentar o argv[i] a uma nova string para usar seus indices*/
-char *append_str(char **argv)
+static char *append_str(char **argv)
 {
 	int		i;
 	char	*temp;
@@ -42,8 +90,8 @@ char *append_str(char **argv)
 	temp = ft_strdup("");
 	while (argv[i] != NULL)
 	{
-		if (ft_strchr(temp, *argv[i]) || !ft_isdigit(*argv[i]))
-			return ("erro");
+		if (verify(argv[i]))
+			return ("Error");
 		//vericar se o valor entre os " " é igual a entrada do argv
 		str2 = ft_strjoin(argv[i], " ");
 		old = temp;
@@ -54,6 +102,23 @@ char *append_str(char **argv)
 	}
 	return (temp);
 }
+/*static void	join(t_list **holder, char *buf)
+{
+	t_list  *new_node;
+	t_list  *last_node;
+
+	last_node = ft_lstlast(*holder);
+	new_node = malloc(sizeof(t_list));
+	if (new_node == NULL)
+		return ;
+	if (*holder == NULL)
+		*holder = new_node;
+	else
+		last_node->next = new_node;
+	new_node->content = buf;
+	new_node->next = NULL;
+}*/
+
 
 void free_matrix(char **str)
 {
@@ -69,7 +134,10 @@ void free_matrix(char **str)
 }
 int	main(int argc, char **argv)
 {
-
+	int	i;
+//	t_list **str = NULL;
+	
+	i = 0;
 	//append = acrescentar
 	if (argc < 2)
 	{
@@ -79,11 +147,13 @@ int	main(int argc, char **argv)
 		return(1);
 	}
 	char *number_list = append_str(argv);
-	//free(number_list); posso apagar!
 	char **numbers = ft_split(number_list, ' ');
-	for (int i = 0; numbers[i] != NULL; i++)
-		printf("%s\n", numbers[i]);
+	//while (numbers[i] != NULL)
+	//	join(str, numbers[i]);
+	// ! isso é p imprimir os numeros !
+		for (int i = 0; numbers[i] != NULL; i++)
+			printf("%s\n", numbers[i]);
+	
 	free(numbers);
-	//free(temp);
 
 }
