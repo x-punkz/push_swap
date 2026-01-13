@@ -6,27 +6,27 @@
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 14:17:57 by daniviei          #+#    #+#             */
-/*   Updated: 2026/01/13 12:22:55 by daniviei         ###   ########.fr       */
+/*   Updated: 2026/01/13 19:25:35 by daniviei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 # Passo a Passo
 **1- Verificar dados de entrada**
-[ ] Verificar duplicadas
+[x] Verificar duplicadas
 [x] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
 [x] Verificar se todos os inputs são de fatos números
 [] Argv[1] sera o topo da lista:
 
 *ATENÇÃO*: Se for encontrado caracteres inválidos ou duplicadas retornar error adequadamente.
 
-[] Transformar os dados de entrada de tipo char* para int
+[x] Transformar os dados de entrada de tipo char* para int
 
 [] Colocar os números int dentro de uma pilha(lista encadeada)
 
 * Os erros incluem, por exemplo:
- [] alguns argumentos não serem inteiros
- [] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
+ [x] alguns argumentos não serem inteiros
+ [x] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
 */
 #include "libft/libft.h"
 #include <stdio.h>
