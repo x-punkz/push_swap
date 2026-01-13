@@ -31,8 +31,8 @@ int	main(int argc, char **argv)
 {
 	if (argc < 4)
 		return (0);
-	printf("mine = %d\n",ft_strncmp(argv[1], argv[2], atoi(argv[3])));
+	printf("mine = %d\n",ft_strcmp(argv[1], argv[2], atoi(argv[3])));
 	printf("std = %d\n", strncmp(argv[1], argv[2], atoi(argv[3])));
-	printf("doideira %d\n",ft_strncmp("test\200", "test\0", 6));
+	printf("doideira %d\n",ft_strcmp("test\200", "test\0", 6));
 	return(0);
 }*/

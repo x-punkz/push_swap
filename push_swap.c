@@ -32,16 +32,16 @@
 #include <stdio.h>
 static int	verify(char *arg)
 {
-	int	i;
-	int	argx;
+	int		i;
+	long	argx;
 
 	i = 0;
 	argx = ft_atol(arg);
-	if (argx < -2147483647 || argx > 2147483647)
+	if (argx < -2147483648 || argx > 2147483647)
 		return (1);
 	while (arg[i])
-	{
-		if (arg[i] == '+' || arg[i] == '-')
+	{	//verica se tem algum valor igual no argv
+		if (arg[i] == '+' || arg[i] == '-' || arg[i] == ' ')
 			i++;
 		if (!ft_isdigit(arg[i]))
 			return (1);
@@ -53,22 +53,20 @@ static int	verify(char *arg)
 static char *append_str(char **argv)
 {
 	int		i;
-	int		j;
 	char	*temp;
 	char	*str2;
 	char	*old;
 
 	i = 1;
-	j = 1;
 	temp = ft_strdup("");
+	//Fazer outras verificacoes
 	while (argv[i] != NULL)
 	{
-		while (argv[j++] != NULL)
-				if (strcmp(argv[i], argv[j]) == 0)
-					return ("Error\n");
 		if (verify(argv[i]))
-			return ("Error\n");
-		//vericar se o valor entre os " " é igual a entrada do argv
+		{
+			ft_putendl_fd("Error", 2);
+			return (NULL);
+		}
 		str2 = ft_strjoin(argv[i], " ");
 		old = temp;
 		temp = ft_strjoin(old, str2);
@@ -111,9 +109,8 @@ void free_matrix(char **str)
 int	main(int argc, char **argv)
 {
 	int	i;
+	int	j;
 //	t_list **str = NULL;
-	
-	i = 0;
 	//append = acrescentar
 	if (argc < 2)
 	{
@@ -122,7 +119,24 @@ int	main(int argc, char **argv)
 		//
 		return(1);
 	}
+	i = 1;
 	char *number_list = append_str(argv);
+	if (!number_list)
+		return (1);
+	while (argv[i] != NULL)
+	{
+		j = i + 1;
+		while (argv[j] != NULL)
+		{
+			if (ft_strcmp(argv[i], argv[j]) == 0)
+			{
+				ft_putendl_fd ("Error", 2);
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
 	char **numbers = ft_split(number_list, ' ');
 	//while (numbers[i] != NULL)
 	//	join(str, numbers[i]);

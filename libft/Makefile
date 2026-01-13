@@ -33,7 +33,7 @@ ft_toupper.c \
 ft_tolower.c \
 ft_strchr.c \
 ft_calloc.c \
-ft_strcmp \
+ft_strcmp.c \
 ft_strdup.c \
 ft_strnstr.c \
 ft_strncmp.c \
