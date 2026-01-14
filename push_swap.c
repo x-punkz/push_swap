@@ -13,20 +13,23 @@
 /*
 # Passo a Passo
 **1- Verificar dados de entrada**
-[ ] Verificar duplicadas
+[x] Verificar duplicadas
 [x] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
 [x] Verificar se todos os inputs são de fatos números
 [] Argv[1] sera o topo da lista:
 
 *ATENÇÃO*: Se for encontrado caracteres inválidos ou duplicadas retornar error adequadamente.
 
-[] Transformar os dados de entrada de tipo char* para int
+[ ] Transformar os dados de entrada de tipo char* para int
 
-[] Colocar os números int dentro de uma pilha(lista encadeada)
+[ ] Colocar os números int dentro de uma pilha(lista encadeada)
+
+[ ] Ordenar os valores na pilha 'a'
+
 
 * Os erros incluem, por exemplo:
- [] alguns argumentos não serem inteiros
- [] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
+ [x] alguns argumentos não serem inteiros
+ [x] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
 */
 #include "libft/libft.h"
 #include <stdio.h>
@@ -76,22 +79,24 @@ static char *append_str(char **argv)
 	}
 	return (temp);
 }
-/*static void	join(t_list **holder, char *buf)
+// adicionar elementos na pilha
+/*static*/ void	join(t_list **holder, char *buf)
 {
 	t_list  *new_node;
 	t_list  *last_node;
-
+	
 	last_node = ft_lstlast(*holder);
 	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
-		return ;
+	return ;
 	if (*holder == NULL)
 		*holder = new_node;
 	else
 		last_node->next = new_node;
 	new_node->content = buf;
+	// new_node->content = ft_atoi(buf);
 	new_node->next = NULL;
-}*/
+}
 
 
 void free_matrix(char **str)
@@ -110,20 +115,21 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
-//	t_list **str = NULL;
-	//append = acrescentar
+	t_list *a = NULL;
+	
 	if (argc < 2)
 	{
-		//apagar
+		//ver qual é o erro a ser mostrado
 		printf("passe os inteiros\n");
-		//
 		return(1);
 	}
+	//append = acrescentar
 	char *number_list = append_str(argv);
 	if (!number_list)
 	return (1);
 	char **numbers = ft_split(number_list, ' ');
 	i = 0;
+	// verificaçao de valores iguais
 	while (numbers[i] != NULL)
 	{
 		j = i + 1;
@@ -138,12 +144,25 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	//while (numbers[i] != NULL)
-	//	join(str, numbers[i]);
+	i = 0;
+	while (numbers[i] != NULL)
+	{
+		join(&a, numbers[i]);
+		i++;
+	}
+	
+	//aux p n perder a referencia da cabeca da lista
+	t_list *aux = a;
+
+	while (aux) {
+		printf("nó da lista %s\n", (char *)aux->content);
+		aux = aux->next;
+	}
+
 	// ! isso é p imprimir os numeros !
-		for (int i = 0; numbers[i] != NULL; i++)
-			printf("%s\n", numbers[i]);
+	for (int i = 0; numbers[i] != NULL; i++)
+	printf("numbers[%d] %s\n",i,  numbers[i]);
 	
 	free(numbers);
-
+	
 }
