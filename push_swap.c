@@ -16,15 +16,15 @@
 [x] Verificar duplicadas
 [x] Verificar se foram passados números dentro do range do INT_MIN >= && <= INT_MAX 
 [x] Verificar se todos os inputs são de fatos números
-[] Argv[1] sera o topo da lista:
+[x] Argv[1] sera o topo da lista:
 
 *ATENÇÃO*: Se for encontrado caracteres inválidos ou duplicadas retornar error adequadamente.
 
-[ ] Transformar os dados de entrada de tipo char* para int
+[x] Transformar os dados de entrada de tipo char* para int
 
-[ ] Colocar os números int dentro de uma pilha(lista encadeada)
+[x] Colocar os números int dentro de uma pilha(lista encadeada)"coloquei na lista mas como char ainda"
 
-[ ] Ordenar os valores na pilha 'a'
+[ ] Ordenar os valores na pilha 'a' usando a pilha 'b'
 
 
 * Os erros incluem, por exemplo:
@@ -67,7 +67,7 @@ static char *append_str(char **argv)
 	{
 		if (verify(argv[i]))
 		{
-			ft_putendl_fd("Error", 2);i = 1;
+			ft_putendl_fd("Error", 2);
 			return (NULL);
 		}
 		str2 = ft_strjoin(argv[i], " ");
@@ -80,21 +80,28 @@ static char *append_str(char **argv)
 	return (temp);
 }
 // adicionar elementos na pilha
-/*static*/ void	join(t_list **holder, char *buf)
+static void	join(t_list **holder, char *buf)
 {
 	t_list  *new_node;
 	t_list  *last_node;
+	int		*value;
 	
 	last_node = ft_lstlast(*holder);
 	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
 	return ;
+	value = malloc(sizeof (int));
+	if (value == NULL)
+	{
+		free(value);
+		return ;
+	}
+	*value = ft_atoi(buf);
 	if (*holder == NULL)
 		*holder = new_node;
 	else
 		last_node->next = new_node;
-	new_node->content = buf;
-	// new_node->content = ft_atoi(buf);
+	new_node->content = value;
 	new_node->next = NULL;
 }
 
@@ -155,7 +162,9 @@ int	main(int argc, char **argv)
 	t_list *aux = a;
 
 	while (aux) {
-		printf("nó da lista %s\n", (char *)aux->content);
+		int	listValue = *(int *)aux->content;
+	// posso passar sem armazenar em var pro printf tbm.
+		printf("nó da lista %d\n", listValue);
 		aux = aux->next;
 	}
 
@@ -164,5 +173,4 @@ int	main(int argc, char **argv)
 	printf("numbers[%d] %s\n",i,  numbers[i]);
 	
 	free(numbers);
-	
 }
