@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   sort_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 17:56:05 by daniviei          #+#    #+#             */
-/*   Updated: 2025/12/23 18:05:56 by daniviei         ###   ########.fr       */
+/*   Created: 2026/01/20 18:19:49 by daniviei          #+#    #+#             */
+/*   Updated: 2026/01/20 18:19:51 by daniviei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-/*typedef struct s_list
+#include "push_swap.h"
+
+void    sort_stack(t_list *stack_a, t_list *stack_b)
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-*/
-void	sort_stack(t_list *a, t_list *b);
-void	lstswap(t_list *a);
-#endif
+    
+}

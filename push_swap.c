@@ -6,7 +6,7 @@
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 14:17:57 by daniviei          #+#    #+#             */
-/*   Updated: 2026/01/13 12:22:55 by daniviei         ###   ########.fr       */
+/*   Updated: 2026/01/20 12:27:45 by daniviei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 [x] Colocar os números int dentro de uma pilha(lista encadeada)"coloquei na lista mas como char ainda"
 
+[ ] Ordenar caso sega so dois ou tres argumentos
 [ ] Ordenar os valores na pilha 'a' usando a pilha 'b'
 
 
@@ -31,7 +32,7 @@
  [x] alguns argumentos não serem inteiros
  [x] alguns argumentos exceder os limites dos números inteiros e/ou a presença de duplicados
 */
-#include "libft/libft.h"
+#include "push_swap.h"
 #include <stdio.h>
 static int	verify(char *arg)
 {
@@ -105,7 +106,6 @@ static void	join(t_list **holder, char *buf)
 	new_node->next = NULL;
 }
 
-
 void free_matrix(char **str)
 {
 	int i;
@@ -123,6 +123,7 @@ int	main(int argc, char **argv)
 	int	i;
 	int	j;
 	t_list *a = NULL;
+	t_list *b = NULL;(void)b;
 	
 	if (argc < 2)
 	{
@@ -132,9 +133,12 @@ int	main(int argc, char **argv)
 	}
 	//append = acrescentar
 	char *number_list = append_str(argv);
-	if (!number_list)
-	return (1);
 	char **numbers = ft_split(number_list, ' ');
+	if (numbers == NULL)
+	{
+		ft_putendl_fd ("Error", 2);
+		return (1);
+	}
 	i = 0;
 	// verificaçao de valores iguais
 	while (numbers[i] != NULL)
@@ -157,7 +161,11 @@ int	main(int argc, char **argv)
 		join(&a, numbers[i]);
 		i++;
 	}
-	
+	sort_stack(a, b);
+	lstswap(a);
+	//Aqui eu ordeno a lista
+	 //sort_stack(a, b);
+
 	//aux p n perder a referencia da cabeca da lista
 	t_list *aux = a;
 
