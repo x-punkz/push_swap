@@ -7,6 +7,7 @@ LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
 SRCS =	lstswap.c \
+	sort_stack.c \
 	push_swap.c \
 
 OBJ = $(SRCS:.c=.o)
