@@ -99,14 +99,41 @@ void	rotrev_ab(t_list *a, t_list *b)
 	rotrev_b(b);
 	ft_putstr_fd("rrr\n", 1);
 }
-
-/*void   push_a(t_list *a, t_list *b)
+/*pega o topo de b e joga pro topo de a*/
+void   push_a(t_list *a, t_list *b)
 {
     if (b == NULL)
         return ;
     t_list *tmp;
 
-    tmp = a->content;
-    a->content = b->content;
+    // Pega o primeiro elem de b
+	tmp = b;
+    b = (b)->next;
+
+	//coloca no topo de a
+	tmp->next = a;
+	a = tmp;
     ft_putstr_fd("pa\n", 1);
-}*/
+}
+
+/*Pega o top de a e joga p topo de b*/
+void   push_b(t_list *a, t_list *b)
+{
+    t_list	*tmp;
+
+	if (a == NULL)
+        return ;
+    // Pega o primeiro elem de b
+	tmp = a;
+    a = (a)->next;
+	//Atualiza o prev do novo top_A
+	if (a)
+		a->prev = NULL;
+	//coloca no topo de a
+	tmp->next = b;
+	if (b)
+		b->prev = tmp;
+	b = tmp;
+	tmp->prev = NULL;
+    ft_putstr_fd("pb\n", 1);
+}

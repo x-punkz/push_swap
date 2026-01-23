@@ -99,16 +99,18 @@ static void	join(t_list **holder, char *buf)
 	}
 	*value = ft_atoi(buf);
 	if (*holder == NULL)
+	{
 		*holder = new_node;
+		new_node->prev = NULL;
+	}
 	else
 		last_node->next = new_node;
 	new_node->content = value;
 	new_node->next = NULL;
 	new_node->prev = last_node;
-	
 }
 
-static void cicle_list(t_list *holder)
+/*static */void cicle_list(t_list *holder)
 {
 	t_list  *last_node;
 
@@ -134,7 +136,7 @@ int	main(int argc, char **argv)
 	int	i;
 	int	j;
 	t_list *a = NULL;
-	t_list *b = NULL;(void)b;
+	t_list *b = NULL;
 	
 	if (argc < 2)
 	{
@@ -176,7 +178,7 @@ int	main(int argc, char **argv)
 	sort_stack(a, b);
 	//aux p n perder a referencia da cabeca da lista
 	t_list *aux = a;
-
+	
 	while (aux) {
 		int	listValue = *(int *)aux->content;
 	// posso passar sem armazenar em var pro printf tbm.
@@ -185,10 +187,5 @@ int	main(int argc, char **argv)
 		if (aux == a)
 			break ;
 	}
-
-	/*// ! isso é p imprimir os numeros !
-	for (int i = 0; numbers[i] != NULL; i++)
-	printf("numbers[%d] %s\n",i,  numbers[i]);
-	*/
-	free(numbers);
+	free_matrix(numbers);
 }
