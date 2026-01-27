@@ -69,6 +69,7 @@ static char *append_str(char **argv)
 		if (verify(argv[i]))
 		{
 			ft_putendl_fd("Error", 2);
+			free(temp);
 			return (NULL);
 		}
 		str2 = ft_strjoin(argv[i], " ");
@@ -81,14 +82,14 @@ static char *append_str(char **argv)
 	return (temp);
 }
 // adicionar elementos na pilha
-void	join(t_list **holder, char *buf)
+void	join(ps_list **holder, char *buf)
 {
-	t_list  *new_node;
-	t_list  *last_node;
+	ps_list  *new_node;
+	ps_list  *last_node;
 	int		*value;
 	
-	last_node = ft_lstlast(*holder);
-	new_node = malloc(sizeof(t_list));
+	last_node = ps_lstlast(*holder);
+	new_node = malloc(sizeof(ps_list));
 	if (new_node == NULL)
 		return ;
 	value = malloc(sizeof (int));
@@ -110,11 +111,11 @@ void	join(t_list **holder, char *buf)
 	new_node->prev = last_node;
 }
 
-/*static */void cicle_list(t_list *holder)
+void double_list(ps_list *holder)
 {
-	t_list  *last_node;
+	ps_list  *last_node;
 
-	last_node = ft_lstlast(holder);
+	last_node = ps_lstlast(holder);
 	holder->prev = last_node;
 	//last_node->next = holder;
 }
@@ -135,8 +136,8 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	t_list *a = NULL;
-	t_list *b = NULL;
+	ps_list *a = NULL;
+	ps_list *b = NULL;
 	
 	if (argc < 2)
 	{
@@ -145,7 +146,10 @@ int	main(int argc, char **argv)
 		return(1);
 	}
 	//append = acrescentar
+	//ver caso de argv == " "
 	char *number_list = append_str(argv);
+	if (number_list == NULL)
+		exit(1);
 	char **numbers = ft_split(number_list, ' ');
 	if (numbers == NULL)
 	{
@@ -174,15 +178,16 @@ int	main(int argc, char **argv)
 		join(&a, numbers[i]);
 		i++;
 	}
-	cicle_list(a);
+	update_index(a);
+	double_list(a);
 	sort_stack(a, b);
 	//aux p n perder a referencia da cabeca da lista
-	t_list *aux = a;
+	ps_list *aux = a;
 	
 	while (aux) {
 		int	listValue = *(int *)aux->content;
 	// posso passar sem armazenar em var pro printf tbm.
-		printf("nó da lista %d\n", listValue);
+		printf("index: %d nó %d\n", aux->index, listValue);
 		aux = aux->next;
 		if (aux == a)
 			break ;

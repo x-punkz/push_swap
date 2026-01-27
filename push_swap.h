@@ -13,28 +13,44 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
-/*typedef struct s_list
+typedef struct push_list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-*/
-void	sort_stack(t_list *a, t_list *b);
-int		ft_lstlen(t_list *lst);
-void    swap_a(t_list *a);
-void    swap_b(t_list *b);
-void    swap_ss(t_list *a, t_list *b);
-void    rot_a(t_list *a);
-void    rot_b(t_list *b);
-void    rot_ab(t_list *a, t_list *b);
-void    rotrev_a(t_list *a);
-void    rotrev_b(t_list *b);
-void    rotrev_ab(t_list *a, t_list *b);
-void	lstswap(t_list *stack);
-void	sort_four(t_list *stack_a, t_list *stack_b);
-int		min_node(t_list *stack);
-int		max_node(t_list *stack);
-//void	sort_five(t_list *stack_a, t_list *stack_b);
-void   push_a(t_list *a, t_list *b);
-void   push_b(t_list **a, t_list **b);
+	int			index;
+	void		*content;
+	int			cost;
+	int			total_cost;
+
+	struct push_list	*target;
+	struct push_list	*next;
+	struct push_list	*prev;
+}					ps_list;
+
+void	sort_stack(ps_list *a, ps_list *b);
+int		ps_lstlen(ps_list *lst);
+void    swap_a(ps_list *a);
+void    swap_b(ps_list *b);
+void    swap_ss(ps_list *a, ps_list *b);
+void    rot_a(ps_list *a);
+void    rot_b(ps_list *b);
+void    rot_ab(ps_list *a, ps_list *b);
+void    rotrev_a(ps_list *a);
+void    rotrev_b(ps_list *b);
+void    rotrev_ab(ps_list *a, ps_list *b);
+void	lstswap(ps_list *stack);
+void	sort_three(ps_list *stack_a);
+void	sort_four(ps_list *stack_a, ps_list *stack_b);
+int		min_node(ps_list *stack);
+void   push_a(ps_list *a, ps_list *b);
+void   push_b(ps_list **a, ps_list **b);
+void	move_b(ps_list *stack_a, ps_list *stack_b);
+void	update_index(ps_list *stack);
+void	target(ps_list *stack_a, ps_list *stack_b);
+void	cost_calculate(ps_list *stack);
+void	total_cost_calculate(ps_list *stack);
+ps_list		*cheap_cost(ps_list *stack_b);
+void	turk(ps_list *stack_a, ps_list *stack_b);
+void	choose_movs(ps_list *stack_a, ps_list *stack_b);
+ps_list	*ps_lstlast(ps_list *lst);
+ps_list	*ps_lstnew(void *content);
+void	ps_lstadd_front(ps_list **lst, ps_list *new);
 #endif

@@ -9,6 +9,9 @@ LIBFT_A = $(LIBFT_DIR)/libft.a
 SRCS =	lstswap.c \
 	sort_stack.c \
 	push_swap.c \
+	push_swap_utils.c \
+	turk.c \
+	turk_utils.c \
 
 OBJ = $(SRCS:.c=.o)
 
@@ -32,3 +35,7 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+beautiful: re
+	make clean
+	clear

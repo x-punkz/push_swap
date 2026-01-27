@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-int	ft_lstlen(t_list *lst)
+int	ps_lstlen(ps_list *lst)
 {
 	int	count;
-	t_list	*aux;
+	ps_list	*aux;
 
 	count = 1;
 	aux = lst;
@@ -29,9 +29,9 @@ int	ft_lstlen(t_list *lst)
 	return (count);
 }
 
-void	sort_three(t_list *stack_a)
+void	sort_three(ps_list *stack_a)
 {
-	t_list	*a;
+	ps_list	*a;
 
 	a = stack_a;
 	if (!stack_a)
@@ -45,9 +45,10 @@ void	sort_three(t_list *stack_a)
 		rot_a(a);
 	if (*(int *)a->content > *(int *)a->next->content)
 		swap_a(a);
+	update_index(stack_a);
 }
 
-void	sort_four(t_list *stack_a, t_list *stack_b)
+void	sort_four(ps_list *stack_a, ps_list *stack_b)
 {
 	while(*(int *)stack_a->content != min_node(stack_a))
 		rot_a(stack_a);
@@ -56,15 +57,15 @@ void	sort_four(t_list *stack_a, t_list *stack_b)
 	push_a(stack_a, stack_b);
 }
 
-/*void	sort_five(t_list *stack_a, t_list *stack_b)
+/*void	sort_five(ps_list *stack_a, ps_list *stack_b)
 {
 	
 }*/
 
-int		min_node(t_list *stack)
+int		min_node(ps_list *stack)
 {
 	int		min;
-	t_list	*aux;
+	ps_list	*aux;
 
 	aux = stack;
 	min = *(int *)aux->content;
@@ -73,40 +74,25 @@ int		min_node(t_list *stack)
 		if (min > *(int *)aux->content)
 			min = *(int *)aux->content;
 		aux = aux->next;
-		if (aux == stack)
-			break ;
 	}
 	return (min);
 }
 
-int		max_node(t_list *stack)
-{	int		max;
-	t_list	*aux;
-
-	max = 0;
-	aux = stack;
-	while(aux->next != stack)
-	{
-		if (max > *(int *)aux->content)
-			max = *(int *)aux->content;
-		aux = aux->next;
-	}
-	return (max);
-}
-
-void	sort_stack(t_list *stack_a, t_list *stack_b)
+void	sort_stack(ps_list *stack_a, ps_list *stack_b)
 {
-	if (ft_lstlen(stack_a) < 6)
+	if (ps_lstlen(stack_a) <= 3)
 	{	
-		if (ft_lstlen(stack_a) == 3)
+		if (ps_lstlen(stack_a) == 2)
+		{
+			if (*(int *)stack_a->content > *(int *)stack_a->next->content)
+				swap_a(stack_a);
+		}
+		if (ps_lstlen(stack_a) == 3)
 			sort_three(stack_a);
-		if (ft_lstlen(stack_a) == 4)
-			sort_four(stack_a, stack_b);
-//		if (ft_lstlen(stack_a) == 5)
-//			sort_five(stack_a, stack_b);
-
+	/*	if (ps_lstlen(stack_a) == 4)
+			sort_four(stack_a, stack_b);*/
 	}
-//	else
-//		algoritimo_de_ordenar(stack_a, stack_b);
+	else
+		turk(stack_a, stack_b);
 
 }
