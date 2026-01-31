@@ -16,34 +16,18 @@
 void	rot_a(ps_list **a, int print)
 {
 	ps_list	*first;
-	ps_list	*last;
+	//ps_list	*last;
+	ps_list	*tmp;
 
 	if (!*a || !(*a)->next)
 		return ;
-	first = ps_lstnew((*a)->content);
+	first = *a;
+	tmp = *a;
 	*a = (*a)->next;
-		// 4. Encontra o último elemento da lista
-	last = *a;
-	while (last->next)
-	{
-		last = last->next;
-		if (last->next == *a)
-			break ;
-	}
-	
-	// 5. Move o primeiro elemento para o final
-	last->next = first;
-	first->prev = last;
-	(*a)->prev = first;
-	first->next = NULL;
-	
-
-	/*ps_list	*tmp;
-
-	tmp = a->content;
-	a->content = a->next->content;
-	a->next->content = a->prev->content;
-	a->prev->content = tmp;*/
+	while (first->next != NULL)
+		first = first->next;
+	tmp->next = NULL;
+	first->next = tmp;
 	if (print)
 		ft_putstr_fd("ra\n", 1);
 }

@@ -52,33 +52,16 @@ void	swap_ss(ps_list *a, ps_list *b)
 }
 
 /*pega o topo de b e joga pro topo de a*/
-void   push_a(ps_list *a, ps_list *b)
+void   push_a(ps_list **a, ps_list **b)
 {
     ps_list	*tmp;
-	ps_list	*last;
 
 	if (b == NULL)
         return ;
-    // mudando a cabeça de b
-	tmp = ps_lstnew(b->content);
-    if (b->next)
-		*b = *b->next;
-	last = b;
-	while (last->next)
-	{
-		last = last->next;
-		if (last->next == b)
-			break ;
-	}
-	//Atualiza o prev do novo top_B
-	if (b)
-		b->prev = last;
-	//coloca no topo de b
-	tmp->next = a;
-	if (a)
-		a->prev = tmp;
-	a = tmp;
-	tmp->prev = ps_lstlast(a);
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = *a;
+	*a = tmp;
     ft_putstr_fd("pa\n", 1);
 }
 

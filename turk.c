@@ -13,86 +13,121 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	doble_rotate(ps_list *stack_a, ps_list *stack_b)
+void	double_rotate(ps_list *stack_a, ps_list *stack_b, ps_list *cheap)
 {
-	ps_list		*aux_a;
-	ps_list		*aux_b;
-
-	aux_a = stack_a;
-	aux_b = stack_b;
-	while (aux_a->cost > 0 && aux_b->cost > 0)
+	while (cheap->cost_a > 0 && cheap->cost_b > 0)
     {
         rot_ab(stack_a, stack_b);
- 		(aux_a->cost)--;
-		(aux_b->cost)--;
+ 		(cheap->cost_a)--;
+		(cheap->cost_b)--;
 	}
-	while (aux_a->cost < 0 && aux_b->cost < 0)
+	while (cheap->cost_a < 0 && cheap->cost_b < 0)
 	{
 		rotrev_ab(&stack_a, &stack_b);
-		(aux_a->cost)++;
-		(aux_b->cost)++;
+		(cheap->cost_a)++;
+		(cheap->cost_b)++;
 	}
 }
 
-void	single_rotate(ps_list *stack_a, ps_list *stack_b)
+void	single_rotate(ps_list **stack_a, ps_list **stack_b, ps_list *cheap)
 {
-	ps_list		*aux_a;
-	ps_list		*aux_b;
-
-	aux_a = stack_a;
-	aux_b = stack_b;
-	while (aux_a->cost > 0)
+	while (cheap->cost_a > 0)
 	{
-	   	rot_a(&stack_a, 1);
-	   	aux_a->cost--;
+	   	rot_a(stack_a, 1);
+	   	cheap->cost_a--;
 	}
-	while (aux_a->cost < 0)
+	while (cheap->cost_a < 0)
 	{
-		rotrev_a(&stack_a, 1);
-	    aux_a->cost++;
+		rotrev_a(stack_a, 1);
+	    cheap->cost_a++;
 	}
-	while (aux_b->cost > 0)
+	while (cheap->cost_b > 0)
 	{
-	    rot_b(&stack_b, 1);
-	    aux_b->cost--;
+	    rot_b(stack_b, 1);
+	    cheap->cost_b--;
 	}
-	while (aux_b->cost < 0)
+	while (cheap->cost_b < 0)
 	{
-		rotrev_b(&stack_b, 1);
-		aux_b->cost++;
+		rotrev_b(stack_b, 1);
+		cheap->cost_b++;
 	}	
 }
 
 ps_list		*cheap_cost(ps_list *stack_b)
 {
-	ps_list		*min_cheap;
-	ps_list		*aux;
-	
-	aux = stack_b;
-	min_cheap = aux;
-	while(aux)
+	ps_list		*tmp;
+	ps_list		*cheapest;
+	int			total_cost;
+
+	tmp = stack_b;
+	cheapest = stack_b;
+	cheapest->total_cost = INT_MAX;
+	while (tmp)
 	{
-		total_cost_calculate(stack_b);
-		if (min_cheap->total_cost > aux->total_cost)
-			min_cheap = aux;
-		aux = aux->next;
+		total_cost = total_cost_calculate(tmp);
+		if (total_cost < cheapest->total_cost)
+		{
+			cheapest = tmp;
+			cheapest->total_cost = total_cost;
+		}
+		tmp = tmp->next;
 	}
-	return (min_cheap);
+	return (cheapest);
+	// ps_list		*min_cheap;
+	// ps_list		*aux;
+	
+	// aux = stack_b;
+	// min_cheap = aux;
+	// while(aux)
+	// {
+	// 	total_cost_calculate(stack_b);
+	// 	if (min_cheap->total_cost > aux->total_cost)
+	// 		min_cheap = aux;
+	// 	aux = aux->next;
+	// }
+	//return (min_cheap);
 }
 
-void	choose_movs(ps_list *stack_a, ps_list *stack_b)
+int	is_sorted(ps_list *stack)
+{
+    if (!stack || !stack->next)
+        return (1);
+    while (stack->next)
+    {
+        if (stack->content > stack->next->content)
+            return (0);
+        stack = stack->next;
+    }
+    return (1);
+}
+
+void	final_order(ps_list **stack_a)
+{
+	ps_list		*min_number;
+	int			size;
+
+
+	size = ps_lstlen(*stack_a);
+	min_number = min_node(*stack_a); 
+	while (*stack_a != min_number)
+	{
+		if (min_number->index <= size / 2)
+			rot_a(stack_a, 1);
+		else
+			rotrev_a(stack_a, 1);
+	}
+}
+
+void	choose_movs(ps_list **stack_a, ps_list **stack_b)
 {
 	ps_list		*cheapest;
-	ps_list		*aux_a;
-	ps_list		*aux_b;
+
 	
-	aux_a = stack_a;
-	aux_b = stack_b;
-	cheapest = cheap_cost(stack_b);
+	cheapest = cheap_cost(*stack_b);
 	//while (aux_b)
 	//{
-		doble_rotate(aux_a, aux_b);
-		single_rotate(aux_a, aux_b);
+		double_rotate(*stack_a, *stack_b, cheapest);
+		single_rotate(stack_a, stack_b, cheapest);
 		push_a(stack_a, stack_b);
 		// if (cheapest->index < ps_lstlen(stack_b)/ 2)
 		// rot_b(stack_b, 1);
@@ -104,23 +139,24 @@ void	choose_movs(ps_list *stack_a, ps_list *stack_b)
 	//}
 }
 
-void	turk(ps_list *stack_a, ps_list *stack_b)
+void	turk(ps_list **stack_a, ps_list **stack_b)
 {
-	int		size;
+	int			size;
+	ps_list		*aux;
 
-	size = ps_lstlen(stack_a);
-	move_b(&stack_a, &stack_b, size);
-	update_index(stack_a);
-	update_index(stack_b);
-	sort_three(&stack_a);
-	while (stack_b)
+	aux = *stack_a;
+	size = ps_lstlen(aux);
+	index_final(*stack_a);
+	move_b(stack_a, stack_b, size);
+	sort_three(stack_a);
+	while (*stack_b)
 	{
-		target(&stack_a, &stack_b);
-		cost_calculate(stack_a, stack_b);
+		update_index(*stack_a, *stack_b);
+		target(stack_a, stack_b);
+		target_index(*stack_b, *stack_a);
+		cost_calculate(*stack_a, *stack_b);
 		choose_movs(stack_a, stack_b);
 	}
-	//fazer uma funçao p escolher os movimentos
-	// se o cheap estiver da metdae p cima de b, rot_b
-	// senao, rot_b
-	
+	if (!is_sorted(*stack_a))
+		final_order(stack_a);	
 }

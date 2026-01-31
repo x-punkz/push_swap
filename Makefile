@@ -14,6 +14,7 @@ SRCS =	swap_and_push.c \
 	push_swap_utils.c \
 	turk.c \
 	turk_utils.c \
+	index_final.c
 
 OBJ = $(SRCS:.c=.o)
 

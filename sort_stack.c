@@ -6,7 +6,7 @@
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:19:49 by daniviei          #+#    #+#             */
-/*   Updated: 2026/01/20 18:19:51 by daniviei         ###   ########.fr       */
+/*   Updated: 2026/01/30 11:43:59 by daniviei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,44 @@
 
 int	ps_lstlen(ps_list *lst)
 {
-	int	count;
-	ps_list	*aux;
+	int			i;
 
-	count = 1;
-	aux = lst;
-	while (aux->next)
+	i = 0;
+	while (lst)
 	{
-		aux = aux->next;
-		count++;
+		i++;
+		lst = lst->next;
 	}
-	return (count);
+	return (i);
 }
 
 void	sort_three(ps_list **stack_a)
 {
+	int		max;
+	
+	update_index(*stack_a, *stack_a);
+	index_final(*stack_a);
+	max = ps_lstlen(*stack_a) - 1;
 	if (!stack_a)
 		return ;
-	
-	if (((*stack_a)->content > (*stack_a)->next->content) &&
-		((*stack_a)->content > (*stack_a)->prev->content))
+	if ((*stack_a)->index_final == max)
 		rot_a(stack_a, 1);
-	
-	if ((*stack_a)->next->content > (*stack_a)->prev->content)
+	else if ((*stack_a)->next->index_final == max)
 		rotrev_a(stack_a, 1);
-	else if ((*stack_a)->content > (*stack_a)->prev->content)
-		rot_a(stack_a, 1);
-	if ((*stack_a)->content > (*stack_a)->next->content)
+	if ((*stack_a)->index_final > (*stack_a)->next->index_final)
 		swap_a(*stack_a);
-	update_index(*stack_a);
-	
 }
+// 	if (((*stack_a)->content > (*stack_a)->next->content) &&
+// 		((*stack_a)->content > (*stack_a)->prev->content))
+// 		rot_a(stack_a, 1);
+	
+// 	if ((*stack_a)->next->content > (*stack_a)->prev->content)
+// 		rotrev_a(stack_a, 1);
+// 	else if ((*stack_a)->content > (*stack_a)->prev->content)
+// 		rot_a(stack_a, 1);
+// 	if ((*stack_a)->content > (*stack_a)->next->content)
+// 		swap_a(*stack_a);
+// }
 
 /*void	sort_four(ps_list *stack_a, ps_list *stack_b)
 {
@@ -60,26 +67,25 @@ void	sort_three(ps_list **stack_a)
 	
 }*/
 
-// int		min_node(ps_list *stack)
-// {
-// 	int		min;
-// 	ps_list	*aux;
+int	max_index(ps_list *stack)
+{
+	int	max;
 
-// 	aux = stack;
-// 	min = *(int *)aux->content;
-// 	while(aux->next)
-// 	{
-// 		if (min > *(int *)aux->content)
-// 			min = *(int *)aux->content;
-// 		aux = aux->next;
-// 	}
-// 	return (min);
-// }
+	max = stack->index;
+	while (stack)
+	{
+		if (stack->index > max)
+			max = stack->index;
+		stack = stack->next;
+	}
+	return (max);
+}
 
 ps_list		*min_node(ps_list *stack)
 {
 	ps_list	*aux;
 	ps_list	*min;
+
 
 	aux = stack;
 	min = stack;
@@ -107,5 +113,5 @@ void	sort_stack(ps_list **stack_a, ps_list **stack_b)
 	/*	if (ps_lstlen(stack_a) == 4)
 			sort_four(stack_a, stack_b);*/
 	else
-		turk(*stack_a, *stack_b);
+		turk(stack_a, stack_b);
 }

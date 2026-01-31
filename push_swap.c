@@ -167,12 +167,10 @@ int	main(int argc, char **argv)
 		join(&a, numbers[i]);
 		i++;
 	}
-	update_index(a);
+	
 	double_list(a);
-	if (ps_lstlen(a) > 1)
-		sort_stack(&a, &b);
-	//aux p n perder a referencia da cabeca da lista
-	print_stack(a);
+	if (ps_lstlen(a) > 1 && !is_sorted(a))
+			sort_stack(&a, &b);
 
 	free_matrix(numbers);
 }

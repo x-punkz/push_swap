@@ -15,47 +15,45 @@
 
 void	move_b(ps_list **stack_a, ps_list **stack_b, int size)
 {
-	int pushed;
-	int chunk_size;
-    
-	pushed = 0;
-	if (size <= 100)
-		chunk_size = 20;
-	else if (size <= 500)
-		chunk_size = 45;
-	else
-		chunk_size = size / 11;
-	while (size > 3 && pushed < size - 3)
+	int 	i;
+
+	i = 0;
+	while (i < size / 2)
 	{
-		if ((*stack_a)->index <= pushed)
+		if ((*stack_a)->index_final < size / 2)
 		{
 			push_b(stack_a, stack_b);
-			if (ps_lstlen(*stack_b) > 1)
-				rot_b(stack_b, 1);
-			pushed++;
-		}
-		else if ((*stack_a)->index <= pushed + chunk_size)
-		{
-			push_b(stack_a, stack_b);
-			pushed++;
+			i++;
 		}
 		else
 			rot_a(stack_a, 1);
 	}
+	while (ps_lstlen(*stack_a) > 3)
+		push_b(stack_a, stack_b);
 }
 
-void	update_index(ps_list *stack)
+void	update_index(ps_list *stack_a, ps_list *stack_b)
 {
 	int	i;
 	ps_list		*aux;
+	ps_list		*aux_b;
 
-	aux = stack;
+	aux = stack_a;
+	aux_b = stack_b;
 	i = 0;
 
 	while (aux)
 	{
 		aux->index = i;
 		aux = aux->next;
+		i++;
+	}
+	i = 0;
+
+	while (aux_b)
+	{
+		aux_b->index = i;
+		aux_b = aux_b->next;
 		i++;
 	}
 }
@@ -65,58 +63,75 @@ void	target(ps_list **stack_a, ps_list **stack_b)
 	int			i;
 	ps_list		*aux_a;
 	ps_list		*aux_b;
-	ps_list		*maybe_target;
+	int		maybe_target;
+	ps_list	*target;
 	
 	i = 0;
+	aux_a = *stack_a;
 	aux_b = *stack_b;
-	maybe_target = min_node(*stack_a);
+	update_index(*stack_a, *stack_b);
+	target = min_node(aux_a);
+	maybe_target = INT_MAX;
 	while (aux_b)
 	{
 		aux_a = *stack_a;
 		while (aux_a)
 		{
 			if (aux_a->content > aux_b->content
-				&& aux_a->content <= maybe_target->content)
-				maybe_target = aux_a;
+				&& aux_a->content <= maybe_target)
+			{
+				maybe_target = aux_a->content;
+				target = aux_a;
+			}
 			aux_a = aux_a->next;
 		}
-		aux_b->target = maybe_target;
+		aux_b->target = target;
 		aux_b = aux_b->next;
 	}
 }
 
 void	cost_calculate(ps_list *stack_a, ps_list *stack_b)
 {
-	int	len;
+	int		len_a;
+	int		len_b;
 
-	len = ps_lstlen(stack_a);
-	while (stack_a)
-	{
-		if (stack_a->index > len / 2)
-			stack_a->cost = stack_a->index;
-		else
-			stack_a->cost = len - stack_a->index;
-		stack_a = stack_a->next;
-	}
-	len = ps_lstlen(stack_b);
+	len_a = ps_lstlen(stack_a);
+	len_b = ps_lstlen(stack_b);
 	while (stack_b)
 	{
-		if (stack_b->index > len / 2)
-			stack_b->cost = stack_b->index;
+		if (stack_b->target_index <= len_a / 2)
+			stack_b->cost_a = stack_b->target_index;
 		else
-			stack_b->cost = len - stack_b->index;
+			stack_b->cost_a = stack_b->target_index - len_a;
+		if (stack_b->index <= len_b / 2)
+			stack_b->cost_b = stack_b->index;
+		else
+			stack_b->cost_b = stack_b->index - len_b;
 		stack_b = stack_b->next;
 	}
 }
 
-void	total_cost_calculate(ps_list *stack)
+int	total_cost_calculate(ps_list *stack_b)
 {
-	ps_list		*aux;
+	ps_list		*aux_b;
+	int	cost_a;
+	int	cost_b;
 
-	aux = stack;
-	while (aux)
+	aux_b = stack_b;
+	cost_a = stack_b->cost_a;
+	cost_b = stack_b->cost_b;
+	while (aux_b)
 	{
-		aux->total_cost = aux->cost + aux->target->cost;
-		aux = aux->next;
+		if ((cost_a >= 0 && cost_b <= 0) || (cost_a <= 0 && cost_b >= 0))
+			aux_b->total_cost = abs(cost_a) + abs(cost_b);
+		if (abs(cost_a) > 0 && abs(cost_b) > 0)
+		{
+			if (abs(cost_a) >= abs(cost_b))
+				aux_b->total_cost = cost_a;
+			else
+				aux_b->total_cost = cost_b;
+		}
+		aux_b = aux_b->next;
 	}
+	return (stack_b->total_cost);
 }
