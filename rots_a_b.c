@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rots_a_b.c                                             :+:      :+:    :+:   */
+/*   rots_a_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,6 @@
 void	rot_a(ps_list **a, int print)
 {
 	ps_list	*first;
-	//ps_list	*last;
 	ps_list	*tmp;
 
 	if (!*a || !(*a)->next)
@@ -35,7 +34,6 @@ void	rot_a(ps_list **a, int print)
 void	rot_b(ps_list **b, int print)
 {
 	ps_list	*first;
-	//ps_list	*last;
 	ps_list	*tmp;
 
 	if (!*b || !(*b)->next)

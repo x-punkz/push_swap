@@ -44,12 +44,11 @@ ps_list	*ps_lstnew(int content)
 
 void	target_index(ps_list *stack_a, ps_list *stack_b)
 {
-	int	i;
-	ps_list *temp_a;
+	int		i;
+	ps_list	*temp_a;
 	ps_list	*temp_b;
 
 	temp_a = stack_a;
-
 	while (temp_a)
 	{
 		i = 0;
@@ -59,7 +58,7 @@ void	target_index(ps_list *stack_a, ps_list *stack_b)
 			if (temp_a && temp_a->target == temp_b)
 			{
 				temp_a->target_index = i;
-				break;
+				break ;
 			}
 			temp_b = temp_b->next;
 			i++;

@@ -12,22 +12,21 @@
 
 #include "push_swap.h"
 #include <stdio.h>
-
+/* APAGAR NO FINAL!!!
 void	print_stack(ps_list *stack)
 {
-	//apvoid	print_stack(ps_list *stack);//apagar esta funçaoagar est funçao!!!
-	ps_list *aux = stack;
+	ps_list	*aux;
 
+	aux = stack;
 	while (aux)
 	{
 		int	listValue = aux->content;
-// posso passar sem armazenar em var pro printf tbm.
 		printf("index: %d nó %d\n", aux->index, listValue);
 		aux = aux->next;
 		if (aux == stack)
 			break ;
 	}
-}
+}*/
 
 static int	verify(char *arg)
 {
@@ -39,17 +38,17 @@ static int	verify(char *arg)
 	if (argx < -2147483648 || argx > 2147483647)
 		return (1);
 	while (arg[i])
-	{	//verica se tem algum valor igual no argv
+	{
 		if (arg[i] == '+' || arg[i] == '-' || arg[i] == ' ')
 			i++;
 		if (!ft_isdigit(arg[i]))
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
-/*Acrescentar o argv[i] a uma nova string para usar seus indices*/
-static char *append_str(char **argv)
+
+static char	*append_str(char **argv)
 {
 	int		i;
 	char	*temp;
@@ -58,7 +57,6 @@ static char *append_str(char **argv)
 
 	i = 1;
 	temp = ft_strdup("");
-	//Fazer outras verificacoes
 	while (argv[i] != NULL)
 	{
 		if (verify(argv[i]))
@@ -76,13 +74,13 @@ static char *append_str(char **argv)
 	}
 	return (temp);
 }
-// adicionar elementos na pilha
+
 void	join(ps_list **holder, char *buf)
 {
-	ps_list  *new_node;
-	ps_list  *last_node;
-	int		value;
-	
+	ps_list		*new_node;
+	ps_list		*last_node;
+	int			value;
+
 	last_node = ps_lstlast(*holder);
 	new_node = malloc(sizeof(ps_list));
 	if (new_node == NULL)
@@ -100,53 +98,54 @@ void	join(ps_list **holder, char *buf)
 	new_node->prev = last_node;
 }
 
-void double_list(ps_list *holder)
+void	double_list(ps_list *holder)
 {
-	ps_list  *last_node;
+	ps_list		*last_node;
 
 	last_node = ps_lstlast(holder);
 	holder->prev = last_node;
-	//last_node->next = holder;
 }
 
-void free_matrix(char **str)
+void	free_matrix(char **str)
 {
-	int i;
+	int		i;
 
 	i = 0;
-	while(str[i] != NULL)
+	while (str[i] != NULL)
 	{
 		free(str[i]);
 		i++;
 	}
 	free(str);
 }
+
 int	main(int argc, char **argv)
 {
-	int	i;
-	int	j;
-	ps_list *a = NULL;
-	ps_list *b = NULL;
-	
+	int		i;
+	int		j;
+	char	*number_list;
+	char	**numbers;
+	ps_list	*a;
+	ps_list	*b;
+
+	a = NULL;
+	b = NULL;
 	if (argc < 2)
 	{
 		//ver qual é o erro a ser mostrado
 		printf("passe os inteiros\n");
-		return(1);
+		return (1);
 	}
-	//append = acrescentar
-	//ver caso de argv == " "
-	char *number_list = append_str(argv);
+	number_list = append_str(argv);
 	if (number_list == NULL)
 		exit(1);
-	char **numbers = ft_split(number_list, ' ');
+	numbers = ft_split(number_list, ' ');
 	if (numbers == NULL)
 	{
 		ft_putendl_fd ("Error", 2);
 		return (1);
 	}
 	i = 0;
-	// verificaçao de valores iguais
 	while (numbers[i] != NULL)
 	{
 		j = i + 1;
@@ -167,9 +166,8 @@ int	main(int argc, char **argv)
 		join(&a, numbers[i]);
 		i++;
 	}
-	
 	double_list(a);
 	if (ps_lstlen(a) > 1 && !is_sorted(a))
-			sort_stack(&a, &b);
+		sort_stack(&a, &b);
 	free_matrix(numbers);
 }

@@ -1,0 +1,7 @@
+## criando a variavel de ambiente
+
+ ARG=$(seq 0 999 | shuf | tr '\n' ' ');  
+
+##executando como argumento
+
+ ./push_swap $ARG

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_and_push.c                                          :+:      :+:    :+:   */
+/*   swap_and_push.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft/libft.h"
 #include "push_swap.h"
-
+//reduzir uma funçao!!!
 void	lstswap(ps_list *stack)
 {
 	ps_list	*tmp;
@@ -51,29 +51,28 @@ void	swap_ss(ps_list *a, ps_list *b)
 	ft_putstr_fd("ss\n", 1);
 }
 
-/*pega o topo de b e joga pro topo de a*/
-void   push_a(ps_list **a, ps_list **b)
+/*Pega o top de b e joga p topo de a*/
+void	push_a(ps_list **a, ps_list **b)
 {
-    ps_list	*tmp;
+	ps_list	*tmp;
 
 	if (b == NULL)
-        return ;
+		return ;
 	tmp = *b;
 	*b = (*b)->next;
 	tmp->next = *a;
 	*a = tmp;
-    ft_putstr_fd("pa\n", 1);
+	ft_putstr_fd("pa\n", 1);
 }
 
 /*Pega o top de a e joga p topo de b*/
-void   push_b(ps_list **a, ps_list **b)
+void	push_b(ps_list **a, ps_list **b)
 {
-    ps_list	*tmp;
+	ps_list	*tmp;
 	ps_list	*last;
 
 	if (a == NULL)
-        return ;
-    // mudando a cabeca de a
+		return ;
 	tmp = ps_lstnew((*a)->content);
 	*a = (*a)->next;
 	last = *a;
@@ -83,13 +82,9 @@ void   push_b(ps_list **a, ps_list **b)
 		if (last->next == *a)
 			break ;
 	}
-	//Atualiza o prev do novo top_A
 	if (a)
 		(*a)->prev = last;
-	//coloca no topo de b
-	//if (b)
-	//	(*b)->prev = tmp;
 	ps_lstadd_front(b, tmp);
 	(*b)->prev = ps_lstlast(*b);
-    ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("pb\n", 1);
 }
