@@ -12,10 +12,12 @@
 
 #include "libft/libft.h"
 #include "push_swap.h"
-//reduzir uma funçao!!!
-void	lstswap(ps_list *stack)
+
+
+//ja foi, mas talvex de p apagar a swap_b tbm!!!
+void	lstswap(t_push *stack)
 {
-	ps_list	*tmp;
+	t_push	*tmp;
 
 	tmp = ps_lstnew(0);
 	tmp->content = stack->next->content;
@@ -23,38 +25,22 @@ void	lstswap(ps_list *stack)
 	stack->content = tmp->content;
 }
 
-void	swap_a(ps_list *a)
+void	swap_a(t_push *a)
 {
 	lstswap(a);
 	ft_putstr_fd("sa\n", 1);
 }
 
-void	swap_b(ps_list *b)
+void	swap_b(t_push *b)
 {
 	lstswap(b);
 	ft_putstr_fd("sb\n", 1);
 }
 
-void	swap_ss(ps_list *a, ps_list *b)
-{
-	ps_list	*tmp_a;
-	ps_list	*tmp_b;
-
-	tmp_a = ps_lstnew(0);
-	tmp_a->content = a->next->content;
-	a->next->content = a->content;
-	a->content = tmp_a->content;
-	tmp_b = ps_lstnew(0);
-	tmp_b->content = b->next->content;
-	b->next->content = b->content;
-	b->content = tmp_b->content;
-	ft_putstr_fd("ss\n", 1);
-}
-
 /*Pega o top de b e joga p topo de a*/
-void	push_a(ps_list **a, ps_list **b)
+void	push_a(t_push **a, t_push **b)
 {
-	ps_list	*tmp;
+	t_push	*tmp;
 
 	if (b == NULL)
 		return ;
@@ -66,10 +52,10 @@ void	push_a(ps_list **a, ps_list **b)
 }
 
 /*Pega o top de a e joga p topo de b*/
-void	push_b(ps_list **a, ps_list **b)
+void	push_b(t_push **a, t_push **b)
 {
-	ps_list	*tmp;
-	ps_list	*last;
+	t_push	*tmp;
+	t_push	*last;
 
 	if (a == NULL)
 		return ;

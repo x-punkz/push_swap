@@ -12,10 +12,11 @@
 
 #include "push_swap.h"
 #include <stdio.h>
+//MOVER 3 FUNCOES
 /* APAGAR NO FINAL!!!
-void	print_stack(ps_list *stack)
+void	print_stack(t_push *stack)
 {
-	ps_list	*aux;
+	t_push	*aux;
 
 	aux = stack;
 	while (aux)
@@ -27,26 +28,6 @@ void	print_stack(ps_list *stack)
 			break ;
 	}
 }*/
-
-static int	verify(char *arg)
-{
-	int		i;
-	long	argx;
-
-	i = 0;
-	argx = ft_atol(arg);
-	if (argx < -2147483648 || argx > 2147483647)
-		return (1);
-	while (arg[i])
-	{
-		if (arg[i] == '+' || arg[i] == '-' || arg[i] == ' ')
-			i++;
-		if (!ft_isdigit(arg[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 static char	*append_str(char **argv)
 {
@@ -75,14 +56,14 @@ static char	*append_str(char **argv)
 	return (temp);
 }
 
-void	join(ps_list **holder, char *buf)
+void	join(t_push **holder, char *buf)
 {
-	ps_list		*new_node;
-	ps_list		*last_node;
+	t_push		*new_node;
+	t_push		*last_node;
 	int			value;
 
 	last_node = ps_lstlast(*holder);
-	new_node = malloc(sizeof(ps_list));
+	new_node = malloc(sizeof(t_push));
 	if (new_node == NULL)
 		return ;
 	value = ft_atoi(buf);
@@ -98,35 +79,21 @@ void	join(ps_list **holder, char *buf)
 	new_node->prev = last_node;
 }
 
-void	double_list(ps_list *holder)
+void	double_list(t_push *holder)
 {
-	ps_list		*last_node;
+	t_push		*last_node;
 
 	last_node = ps_lstlast(holder);
 	holder->prev = last_node;
 }
 
-void	free_matrix(char **str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != NULL)
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
 int	main(int argc, char **argv)
 {
 	int		i;
-	int		j;
 	char	*number_list;
 	char	**numbers;
-	ps_list	*a;
-	ps_list	*b;
+	t_push	*a;
+	t_push	*b;
 
 	a = NULL;
 	b = NULL;
@@ -140,34 +107,23 @@ int	main(int argc, char **argv)
 	if (number_list == NULL)
 		exit(1);
 	numbers = ft_split(number_list, ' ');
+	free(number_list);
 	if (numbers == NULL)
 	{
 		ft_putendl_fd ("Error", 2);
 		return (1);
 	}
-	i = 0;
-	while (numbers[i] != NULL)
-	{
-		j = i + 1;
-		while (numbers[j] != NULL)
-		{
-			if (ft_strcmp(numbers[i], numbers[j]) == 0)
-			{
-				ft_putendl_fd ("Error", 2);
-				return (1);
-			}
-			j++;
-		}
-		i++;
-	}
+	if (check_double(numbers) != 0)
+		exit(1);
 	i = 0;
 	while (numbers[i] != NULL)
 	{
 		join(&a, numbers[i]);
 		i++;
 	}
+	free_matrix(numbers);
 	double_list(a);
 	if (ps_lstlen(a) > 1 && !is_sorted(a))
 		sort_stack(&a, &b);
-	free_matrix(numbers);
+	free_list(&a);
 }

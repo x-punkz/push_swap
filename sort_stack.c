@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	ps_lstlen(ps_list *lst)
+int	ps_lstlen(t_push *lst)
 {
 	int			i;
 
@@ -25,7 +25,7 @@ int	ps_lstlen(ps_list *lst)
 	return (i);
 }
 
-void	sort_three(ps_list **stack_a)
+void	sort_three(t_push **stack_a)
 {
 	int		max;
 
@@ -42,7 +42,7 @@ void	sort_three(ps_list **stack_a)
 		swap_a(*stack_a);
 }
 
-int	max_index(ps_list *stack)
+int	max_index(t_push *stack)
 {
 	int	max;
 
@@ -56,10 +56,10 @@ int	max_index(ps_list *stack)
 	return (max);
 }
 
-ps_list	*min_node(ps_list *stack)
+t_push	*min_node(t_push *stack)
 {
-	ps_list	*aux;
-	ps_list	*min;
+	t_push	*aux;
+	t_push	*min;
 
 	aux = stack;
 	min = stack;
@@ -72,7 +72,7 @@ ps_list	*min_node(ps_list *stack)
 	return (min);
 }
 
-void	sort_stack(ps_list **stack_a, ps_list **stack_b)
+void	sort_stack(t_push **stack_a, t_push **stack_b)
 {
 	int		size;
 

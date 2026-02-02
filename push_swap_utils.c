@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	ps_lstadd_front(ps_list **lst, ps_list *new)
+void	ps_lstadd_front(t_push **lst, t_push *new)
 {
 	if (!new || !lst)
 		return ;
@@ -21,7 +21,7 @@ void	ps_lstadd_front(ps_list **lst, ps_list *new)
 	*lst = new;
 }
 
-ps_list	*ps_lstlast(ps_list *lst)
+t_push	*ps_lstlast(t_push *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -30,11 +30,11 @@ ps_list	*ps_lstlast(ps_list *lst)
 	return (lst);
 }
 
-ps_list	*ps_lstnew(int content)
+t_push	*ps_lstnew(int content)
 {
-	ps_list	*node;
+	t_push	*node;
 
-	node = (ps_list *) malloc(sizeof (ps_list));
+	node = (t_push *) malloc(sizeof (t_push));
 	if (!node)
 		return (NULL);
 	node->content = content;
@@ -42,11 +42,11 @@ ps_list	*ps_lstnew(int content)
 	return (node);
 }
 
-void	target_index(ps_list *stack_a, ps_list *stack_b)
+void	target_index(t_push *stack_a, t_push *stack_b)
 {
 	int		i;
-	ps_list	*temp_a;
-	ps_list	*temp_b;
+	t_push	*temp_a;
+	t_push	*temp_b;
 
 	temp_a = stack_a;
 	while (temp_a)

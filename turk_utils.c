@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 // Target ta com 26 linhas
-void	move_b(ps_list **stack_a, ps_list **stack_b, int size)
+void	move_b(t_push **stack_a, t_push **stack_b, int size)
 {
 	int	i;
 
@@ -32,11 +32,11 @@ void	move_b(ps_list **stack_a, ps_list **stack_b, int size)
 		push_b(stack_a, stack_b);
 }
 
-void	update_index(ps_list *stack_a, ps_list *stack_b)
+void	update_index(t_push *stack_a, t_push *stack_b)
 {
 	int			i;
-	ps_list		*aux;
-	ps_list		*aux_b;
+	t_push		*aux;
+	t_push		*aux_b;
 
 	aux = stack_a;
 	aux_b = stack_b;
@@ -56,12 +56,12 @@ void	update_index(ps_list *stack_a, ps_list *stack_b)
 	}
 }
 
-void	target(ps_list *stack_a, ps_list *stack_b)
+void	target(t_push *stack_a, t_push *stack_b)
 {
-	ps_list		*aux_a;
-	ps_list		*aux_b;
+	t_push		*aux_a;
+	t_push		*aux_b;
 	int			maybe_target;
-	ps_list		*target;
+	t_push		*target;
 
 	aux_b = stack_b;
 	while (aux_b)
@@ -86,7 +86,7 @@ void	target(ps_list *stack_a, ps_list *stack_b)
 	}
 }
 
-void	cost_calculate(ps_list *stack_a, ps_list *stack_b)
+void	cost_calculate(t_push *stack_a, t_push *stack_b)
 {
 	int		len_a;
 	int		len_b;
@@ -107,9 +107,9 @@ void	cost_calculate(ps_list *stack_a, ps_list *stack_b)
 	}
 }
 
-int	total_cost_calculate(ps_list *stack_b)
+int	total_cost_calculate(t_push *stack_b)
 {
-	ps_list		*aux_b;
+	t_push		*aux_b;
 	int			cost_a;
 	int			cost_b;
 

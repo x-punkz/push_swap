@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	index_final(ps_list *stack)
+void	index_final(t_push *stack)
 {
-	ps_list	*tmp;
-	ps_list	*tmp2;
+	t_push	*tmp;
+	t_push	*tmp2;
 	int		i;
 
 	tmp = stack;

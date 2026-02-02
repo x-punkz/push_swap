@@ -13,10 +13,10 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	rot_a(ps_list **a, int print)
+void	rot_a(t_push **a, int print)
 {
-	ps_list	*first;
-	ps_list	*tmp;
+	t_push	*first;
+	t_push	*tmp;
 
 	if (!*a || !(*a)->next)
 		return ;
@@ -31,10 +31,10 @@ void	rot_a(ps_list **a, int print)
 		ft_putstr_fd("ra\n", 1);
 }
 
-void	rot_b(ps_list **b, int print)
+void	rot_b(t_push **b, int print)
 {
-	ps_list	*first;
-	ps_list	*tmp;
+	t_push	*first;
+	t_push	*tmp;
 
 	if (!*b || !(*b)->next)
 		return ;
@@ -49,7 +49,7 @@ void	rot_b(ps_list **b, int print)
 		ft_putstr_fd("rb\n", 1);
 }
 
-void	rot_ab(ps_list **a, ps_list **b)
+void	rot_ab(t_push **a, t_push **b)
 {
 	rot_a(a, 0);
 	rot_b(b, 0);

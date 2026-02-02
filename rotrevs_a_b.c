@@ -12,11 +12,11 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	rotrev_a(ps_list **a, int print)
+void	rotrev_a(t_push **a, int print)
 {
-	ps_list		*temp;
-	ps_list		*last;
-	ps_list		*second_last;
+	t_push		*temp;
+	t_push		*last;
+	t_push		*second_last;
 
 	if (a == NULL || *a == NULL)
 		return ;
@@ -34,11 +34,11 @@ void	rotrev_a(ps_list **a, int print)
 		ft_putstr_fd("rra\n", 1);
 }
 
-void	rotrev_b(ps_list **b, int print)
+void	rotrev_b(t_push **b, int print)
 {
-	ps_list		*temp;
-	ps_list		*last;
-	ps_list		*second_last;
+	t_push		*temp;
+	t_push		*last;
+	t_push		*second_last;
 
 	if (b == NULL || *b == NULL)
 		return ;
@@ -56,7 +56,7 @@ void	rotrev_b(ps_list **b, int print)
 		ft_putstr_fd("rrb\n", 1);
 }
 
-void	rotrev_ab(ps_list **a, ps_list **b)
+void	rotrev_ab(t_push **a, t_push **b)
 {
 	rotrev_a (a, 0);
 	rotrev_b (b, 0);

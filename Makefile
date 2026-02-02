@@ -11,6 +11,7 @@ SRCS =	swap_and_push.c \
 	rotrevs_a_b.c \
 	sort_stack.c \
 	push_swap.c \
+	parser.c \
 	push_swap_utils.c \
 	turk.c \
 	turk_utils.c \

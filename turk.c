@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 //tirar 2 funçoes
-void	double_rotate(ps_list **stack_a, ps_list **stack_b, ps_list *cheap)
+void	double_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
 {
 	while (cheap->cost_a > 0 && cheap->cost_b > 0)
 	{
@@ -29,7 +29,7 @@ void	double_rotate(ps_list **stack_a, ps_list **stack_b, ps_list *cheap)
 	}
 }
 
-void	single_rotate(ps_list **stack_a, ps_list **stack_b, ps_list *cheap)
+void	single_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
 {
 	while (cheap->cost_a > 0)
 	{
@@ -53,10 +53,10 @@ void	single_rotate(ps_list **stack_a, ps_list **stack_b, ps_list *cheap)
 	}
 }
 
-ps_list	*cheap_cost(ps_list *stack_b)
+t_push	*cheap_cost(t_push *stack_b)
 {
-	ps_list		*tmp;
-	ps_list		*cheapest;
+	t_push		*tmp;
+	t_push		*cheapest;
 	int			total_cost;
 
 	tmp = stack_b;
@@ -74,7 +74,7 @@ ps_list	*cheap_cost(ps_list *stack_b)
 	return (cheapest);
 }
 
-int	is_sorted(ps_list *stack)
+int	is_sorted(t_push *stack)
 {
 	if (!stack || !stack->next)
 		return (1);
@@ -87,9 +87,9 @@ int	is_sorted(ps_list *stack)
 	return (1);
 }
 
-void	final_order(ps_list **stack_a)
+void	final_order(t_push **stack_a)
 {
-	ps_list		*min_number;
+	t_push		*min_number;
 	int			size;
 
 	size = ps_lstlen(*stack_a);
@@ -103,9 +103,9 @@ void	final_order(ps_list **stack_a)
 	}
 }
 
-void	choose_movs(ps_list **stack_a, ps_list **stack_b)
+void	choose_movs(t_push **stack_a, t_push **stack_b)
 {
-	ps_list		*cheapest;
+	t_push		*cheapest;
 
 	cheapest = cheap_cost(*stack_b);
 	double_rotate(stack_a, stack_b, cheapest);
@@ -113,10 +113,10 @@ void	choose_movs(ps_list **stack_a, ps_list **stack_b)
 	push_a(stack_a, stack_b);
 }
 
-void	turk(ps_list **stack_a, ps_list **stack_b)
+void	turk(t_push **stack_a, t_push **stack_b)
 {
 	int			size;
-	ps_list		*aux;
+	t_push		*aux;
 
 	aux = *stack_a;
 	size = ps_lstlen(aux);
