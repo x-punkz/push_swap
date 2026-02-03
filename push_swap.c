@@ -11,32 +11,15 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//MOVER 3 FUNCOES
-/* APAGAR NO FINAL!!!
-void	print_stack(t_push *stack)
-{
-	t_push	*aux;
-
-	aux = stack;
-	while (aux)
-	{
-		int	listValue = aux->content;
-		printf("index: %d nó %d\n", aux->index, listValue);
-		aux = aux->next;
-		if (aux == stack)
-			break ;
-	}
-}*/
 
 static char	*append_str(char **argv)
 {
 	int		i;
 	char	*temp;
 	char	*str2;
-	char	*old;
 
 	i = 1;
-	temp = ft_strdup("");
+	temp = ft_calloc(1, 1);
 	while (argv[i] != NULL)
 	{
 		if (verify(argv[i]))
@@ -45,11 +28,9 @@ static char	*append_str(char **argv)
 			free(temp);
 			return (NULL);
 		}
-		str2 = ft_strjoin(argv[i], " ");
-		old = temp;
-		temp = ft_strjoin(old, str2);
-		free(str2);
-		free(old);
+		str2 = argv[i];
+		temp = ps_strjoin(&temp, str2);
+		temp = ps_strjoin(&temp, " ");
 		i++;
 	}
 	return (temp);
@@ -58,32 +39,15 @@ static char	*append_str(char **argv)
 void	join(t_push **holder, char *buf)
 {
 	t_push		*new_node;
-	t_push		*last_node;
 	int			value;
 
-	last_node = ps_lstlast(*holder);
-	new_node = malloc(sizeof(t_push));
-	if (new_node == NULL)
-		return ;
 	value = ft_atoi(buf);
-	if (*holder == NULL)
-	{
-		*holder = new_node;
-		new_node->prev = NULL;
-	}
-	else
-		last_node->next = new_node;
+	new_node = malloc(sizeof (t_push));
+	if (!new_node)
+		return ;
 	new_node->content = value;
 	new_node->next = NULL;
-	new_node->prev = last_node;
-}
-
-void	double_list(t_push *holder)
-{
-	t_push		*last_node;
-
-	last_node = ps_lstlast(holder);
-	holder->prev = last_node;
+	ps_lstadd_back(holder, new_node);
 }
 
 int	main(int argc, char **argv)
@@ -109,8 +73,8 @@ int	main(int argc, char **argv)
 	}
 	check_double(numbers);
 	append_lst(&a, numbers);
-	double_list(a);
 	if (ps_lstlen(a) > 1 && !is_sorted(a))
 		sort_stack(&a, &b);
 	free_list(&a);
+	free_list(&b);
 }

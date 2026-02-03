@@ -69,6 +69,7 @@ void	target(t_push *stack_a, t_push *stack_b)
 		maybe_target = INT_MAX;
 		target = NULL;
 		aux_a = stack_a;
+		target = min_node(stack_a);
 		while (aux_a)
 		{
 			if (aux_a->content > aux_b->content
@@ -79,8 +80,6 @@ void	target(t_push *stack_a, t_push *stack_b)
 			}
 			aux_a = aux_a->next;
 		}
-		if (!target)
-			target = min_node(stack_a);
 		aux_b->target = target;
 		aux_b = aux_b->next;
 	}

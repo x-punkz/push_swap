@@ -31,7 +31,6 @@ typedef struct s_push
 
 void	free_list(t_push **list);
 void	free_matrix(char **str);
-void	print_stack(t_push *stack);//apagar esta funçao
 int		verify(char *arg);
 int		check_double(char **matrix);
 void	join(t_push **holder, char *buf);
@@ -57,7 +56,7 @@ t_push	*min_node(t_push *stack);
 int		max_index(t_push *stack);
 void	push_a(t_push **a, t_push **b);
 void	push_b(t_push **a, t_push **b);
-void	move_b(t_push **stack_a, t_push **stack_b, int size);/**/
+void	move_b(t_push **stack_a, t_push **stack_b, int size);
 void	update_index(t_push *stack_a, t_push *stack_b);
 void	target(t_push *stack_a, t_push *stack_b);
 void	cost_calculate(t_push *stack, t_push *stack_b);
@@ -65,8 +64,12 @@ int		total_cost_calculate(t_push *stack_b);
 t_push	*cheap_cost(t_push *stack_b);
 void	turk(t_push **stack_a, t_push **stack_b);
 void	choose_movs(t_push **stack_a, t_push **stack_b);
+void	double_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap);
+void	single_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap);
+void	ps_lstadd_back(t_push **lst, t_push *new);
 t_push	*ps_lstlast(t_push *lst);
 t_push	*ps_lstnew(int content);
 void	ps_lstadd_front(t_push **lst, t_push *new);
 int		mod(int n);
+char	*ps_strjoin(char **s1, char const *s2);
 #endif

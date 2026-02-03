@@ -13,8 +13,6 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-
-//ja foi, mas talvex de p apagar a swap_b tbm!!!
 void	lstswap(t_push *stack)
 {
 	t_push	*tmp;
@@ -23,6 +21,7 @@ void	lstswap(t_push *stack)
 	tmp->content = stack->next->content;
 	stack->next->content = stack->content;
 	stack->content = tmp->content;
+	free(tmp);
 }
 
 void	swap_a(t_push *a)
@@ -59,18 +58,14 @@ void	push_b(t_push **a, t_push **b)
 
 	if (a == NULL)
 		return ;
-	tmp = ps_lstnew((*a)->content);
+	tmp = *a;
 	*a = (*a)->next;
 	last = *a;
 	while (last->next)
-	{
 		last = last->next;
-		if (last->next == *a)
-			break ;
-	}
 	if (a)
 		(*a)->prev = last;
-	ps_lstadd_front(b, tmp);
-	(*b)->prev = ps_lstlast(*b);
+	tmp->next = *b;
+	*b = tmp;
 	ft_putstr_fd("pb\n", 1);
 }

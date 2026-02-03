@@ -34,7 +34,7 @@ t_push	*ps_lstnew(int content)
 {
 	t_push	*node;
 
-	node = (t_push *) malloc(sizeof (t_push));
+	node = malloc(sizeof(t_push));
 	if (!node)
 		return (NULL);
 	node->content = content;

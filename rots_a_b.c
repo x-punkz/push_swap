@@ -55,3 +55,43 @@ void	rot_ab(t_push **a, t_push **b)
 	rot_b(b, 0);
 	ft_putstr_fd("rr\n", 1);
 }
+
+void	double_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
+{
+	while (cheap->cost_a > 0 && cheap->cost_b > 0)
+	{
+		rot_ab(stack_a, stack_b);
+		(cheap->cost_a)--;
+		(cheap->cost_b)--;
+	}
+	while (cheap->cost_a < 0 && cheap->cost_b < 0)
+	{
+		rotrev_ab(stack_a, stack_b);
+		(cheap->cost_a)++;
+		(cheap->cost_b)++;
+	}
+}
+
+void	single_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
+{
+	while (cheap->cost_a > 0)
+	{
+		rot_a(stack_a, 1);
+		cheap->cost_a--;
+	}
+	while (cheap->cost_a < 0)
+	{
+		rotrev_a(stack_a, 1);
+		cheap->cost_a++;
+	}
+	while (cheap->cost_b > 0)
+	{
+		rot_b(stack_b, 1);
+		cheap->cost_b--;
+	}
+	while (cheap->cost_b < 0)
+	{
+		rotrev_b(stack_b, 1);
+		cheap->cost_b++;
+	}
+}
