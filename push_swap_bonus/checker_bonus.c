@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniviei <daniviei@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 14:17:57 by daniviei          #+#    #+#             */
-/*   Updated: 2026/01/20 12:27:45 by daniviei         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:13:04 by daniviei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	}
 	check_double(numbers);
 	append_lst(&a, numbers);
-	if (ps_lstlen(a) > 1 && !is_sorted(a))
+	if (ps_lstlen(a) > 1)
 		check_program(&a, &b, numbers);
 	free_list(&a);
 	free_list(&b);
