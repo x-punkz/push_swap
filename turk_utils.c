@@ -13,6 +13,8 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+/* Move items from stack A to stack B up to half the stack based on their
+final index, after anyway until 3 items remain.  */
 void	move_b(t_push **stack_a, t_push **stack_b, int size)
 {
 	int	i;
@@ -37,6 +39,7 @@ void	move_b(t_push **stack_a, t_push **stack_b, int size)
 		push_b(stack_a, stack_b);
 }
 
+/* Updates the indices based on their current positions. */
 void	update_index(t_push *stack_a, t_push *stack_b)
 {
 	int			i;
@@ -61,6 +64,7 @@ void	update_index(t_push *stack_a, t_push *stack_b)
 	}
 }
 
+/* sets the target of all nodes in stack B */
 void	target(t_push *stack_a, t_push *stack_b)
 {
 	t_push		*aux_a;
@@ -90,6 +94,7 @@ void	target(t_push *stack_a, t_push *stack_b)
 	}
 }
 
+/* Calculate the cost based on a target index. */
 void	cost_calculate(t_push *stack_a, t_push *stack_b)
 {
 	int		len_a;
@@ -111,6 +116,7 @@ void	cost_calculate(t_push *stack_a, t_push *stack_b)
 	}
 }
 
+/* Calculate the total cost based on the cost of moving A and moving B. */
 int	total_cost_calculate(t_push *stack_b)
 {
 	t_push		*aux_b;

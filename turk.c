@@ -13,6 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
+/* Returns the cheapest node based on the total cost of each node. */
 t_push	*cheap_cost(t_push *stack_b)
 {
 	t_push		*tmp;
@@ -34,6 +35,7 @@ t_push	*cheap_cost(t_push *stack_b)
 	return (cheapest);
 }
 
+/* Verify if the list is sorted */
 int	is_sorted(t_push *stack)
 {
 	if (!stack || !stack->next)
@@ -47,6 +49,7 @@ int	is_sorted(t_push *stack)
 	return (1);
 }
 
+/* Rotate the list until the smallest element is at index 0. */
 void	final_order(t_push **stack_a)
 {
 	t_push		*min_number;
@@ -64,6 +67,7 @@ void	final_order(t_push **stack_a)
 	}
 }
 
+/* Choose movements based on cheapest cost */
 void	choose_movs(t_push **stack_a, t_push **stack_b)
 {
 	t_push		*cheapest;
@@ -74,6 +78,7 @@ void	choose_movs(t_push **stack_a, t_push **stack_b)
 	push_a(stack_a, stack_b);
 }
 
+/* executes the Turkish algorithm */
 void	turk(t_push **stack_a, t_push **stack_b)
 {
 	int			size;

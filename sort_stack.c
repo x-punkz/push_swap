@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/* count numbers of nodes on the linked list*/
 int	ps_lstlen(t_push *lst)
 {
 	int			i;
@@ -56,6 +56,7 @@ int	max_index(t_push *stack)
 	return (max);
 }
 
+/* Return the minimum node*/
 t_push	*min_node(t_push *stack)
 {
 	t_push	*aux;

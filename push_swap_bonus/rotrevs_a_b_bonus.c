@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap_bonus.h"
 
+/* Move last node for the top of list */
 void	rotrev_a(t_push **a)
 {
 	t_push	*temp;
@@ -55,6 +56,7 @@ void	rotrev_b(t_push **b)
 	*b = last;
 }
 
+/* Move both last nodes for the top of lists */
 void	rotrev_ab(t_push **a, t_push **b)
 {
 	if (ps_lstlen(*a) < 2)

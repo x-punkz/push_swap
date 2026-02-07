@@ -12,6 +12,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
+/* Move last node for the top of list */
 void	rotrev_a(t_push **a, int print)
 {
 	t_push		*temp;
@@ -56,6 +57,7 @@ void	rotrev_b(t_push **b, int print)
 		ft_putstr_fd("rrb\n", 1);
 }
 
+/* Move both last nodes for the top of lists */
 void	rotrev_ab(t_push **a, t_push **b)
 {
 	rotrev_a (a, 0);

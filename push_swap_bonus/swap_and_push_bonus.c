@@ -12,6 +12,7 @@
 
 #include "push_swap_bonus.h"
 
+/* The first node is swapped with the second node */
 void	lstswap(t_push **stack)
 {
 	t_push	*tmp;
@@ -37,6 +38,7 @@ void	swap_b(t_push **b)
 	lstswap(b);
 }
 
+/* Push the top node of list B and send it to the top node of list A. */
 void	push_a(t_push **a, t_push **b)
 {
 	t_push	*tmp;
@@ -51,6 +53,7 @@ void	push_a(t_push **a, t_push **b)
 	*a = tmp;
 }
 
+/* Take the top node of list A and send it to the top node of list B. */
 void	push_b(t_push **a, t_push **b)
 {
 	t_push	*tmp;

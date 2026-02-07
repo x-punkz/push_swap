@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-
+/* Checks the argument and adds it to the string. */
 static char	*append_str(char **argv)
 {
 	int		i;
@@ -36,6 +36,7 @@ static char	*append_str(char **argv)
 	return (temp);
 }
 
+/* Converts matrix vector to an int and adds it to a new node*/
 void	join(t_push **holder, char *buf)
 {
 	t_push		*new_node;

@@ -1,6 +1,6 @@
 NAME = libftpushswap.a
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 AR = ar -rc

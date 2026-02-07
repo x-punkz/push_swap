@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/* Set the index of the nodes, as if they were already sorted.*/
 void	index_final(t_push *stack)
 {
 	t_push	*tmp;
@@ -34,6 +35,7 @@ void	index_final(t_push *stack)
 	}
 }
 
+/* Transform the cost value into positive value*/
 int	mod(int n)
 {
 	if (n < 0)

@@ -13,6 +13,7 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+/* The first node is swapped with the second node */
 void	lstswap(t_push *stack)
 {
 	t_push	*tmp;
@@ -36,7 +37,7 @@ void	swap_b(t_push *b)
 	ft_putstr_fd("sb\n", 1);
 }
 
-/*Pega o top de b e joga p topo de a*/
+/* Push the top node of list B and send it to the top node of list A. */
 void	push_a(t_push **a, t_push **b)
 {
 	t_push	*tmp;
@@ -50,7 +51,7 @@ void	push_a(t_push **a, t_push **b)
 	ft_putstr_fd("pa\n", 1);
 }
 
-/*Pega o top de a e joga p topo de b*/
+/* Take the top node of list A and send it to the top node of list B. */
 void	push_b(t_push **a, t_push **b)
 {
 	t_push	*tmp;

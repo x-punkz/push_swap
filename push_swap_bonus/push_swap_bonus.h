@@ -16,6 +16,7 @@
 # include "get_next_line_bonus.h"
 # include <limits.h>
 
+/* a struct of the type s_push with the alias t_push */
 typedef struct s_push
 {
 	int				content;

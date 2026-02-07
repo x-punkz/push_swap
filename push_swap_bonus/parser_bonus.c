@@ -12,6 +12,7 @@
 
 #include "push_swap_bonus.h"
 
+/* Verify BIG_INT, non number and arg == null*/
 int	verify(char *arg)
 {
 	int		i;
@@ -63,6 +64,7 @@ void	free_matrix(char **str)
 	free(str);
 }
 
+/*Verify duplicate number, if find, free in matrix */
 int	check_double(char **matrix)
 {
 	int	i;
@@ -88,6 +90,7 @@ int	check_double(char **matrix)
 	return (0);
 }
 
+/* Append the matrix elements to each node in the list. */
 void	append_lst(t_push **stack_a, char **matrix)
 {
 	int	i;

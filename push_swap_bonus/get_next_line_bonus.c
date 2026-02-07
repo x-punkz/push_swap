@@ -12,6 +12,7 @@
 #include "get_next_line_bonus.h"
 #define MAX_FD 1024
 
+/* My GNL (get next line) with a ft_join*/
 static char	*gnljoin(char **s1, char *s2);
 
 static char	*readed(char **h)

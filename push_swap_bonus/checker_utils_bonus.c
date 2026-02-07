@@ -12,6 +12,7 @@
 
 #include "push_swap_bonus.h"
 
+/* Adds a new node to the last position in the linked list.*/
 void	ps_lstadd_front(t_push **lst, t_push *new)
 {
 	if (!new || !lst)
@@ -20,6 +21,7 @@ void	ps_lstadd_front(t_push **lst, t_push *new)
 	*lst = new;
 }
 
+/* Return the last node in the linked list*/
 t_push	*ps_lstlast(t_push *lst)
 {
 	if (!lst)
@@ -29,6 +31,7 @@ t_push	*ps_lstlast(t_push *lst)
 	return (lst);
 }
 
+/* Return a new node */
 t_push	*ps_lstnew(int content)
 {
 	t_push	*node;
@@ -41,6 +44,7 @@ t_push	*ps_lstnew(int content)
 	return (node);
 }
 
+/* Verify if the linked list are sorted */
 int	is_sorted(t_push *stack)
 {
 	if (!stack || !stack->next)
@@ -54,6 +58,7 @@ int	is_sorted(t_push *stack)
 	return (1);
 }
 
+/* Check the output and verify if it orders the list*/
 void	check_program(t_push **stack_a, t_push **stack_b, char **matrix)
 {
 	char	*mov;

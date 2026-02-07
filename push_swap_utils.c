@@ -42,6 +42,7 @@ t_push	*ps_lstnew(int content)
 	return (node);
 }
 
+/* Sets the target index for each element. */
 void	target_index(t_push *stack_a, t_push *stack_b)
 {
 	int		i;

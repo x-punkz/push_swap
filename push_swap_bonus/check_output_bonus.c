@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-
+/* Check valid output */
 int	check_output(char *mov, t_push **stack_a, t_push **stack_b)
 {
 	if (ft_strcmp(mov, "sa\n") == 0)
@@ -41,6 +41,7 @@ int	check_output(char *mov, t_push **stack_a, t_push **stack_b)
 	return (1);
 }
 
+/* Join two strings and free the first one. */
 char	*join_free(char **s1, char *s2)
 {
 	int		i;

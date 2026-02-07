@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 #include "libft/libft.h"
-
+/* Move top of list, to next node of last node */
 void	rot_a(t_push **a, int print)
 {
 	t_push	*first;
@@ -49,6 +49,7 @@ void	rot_b(t_push **b, int print)
 		ft_putstr_fd("rb\n", 1);
 }
 
+/* Mov both top, to next node of both last node */
 void	rot_ab(t_push **a, t_push **b)
 {
 	rot_a(a, 0);
@@ -56,6 +57,8 @@ void	rot_ab(t_push **a, t_push **b)
 	ft_putstr_fd("rr\n", 1);
 }
 
+/* 
+Check if it's necessary to rotate both stacks with rot or rotrev. */
 void	double_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
 {
 	while (cheap->cost_a > 0 && cheap->cost_b > 0)
@@ -72,6 +75,7 @@ void	double_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
 	}
 }
 
+/* Check if it is necessary to run stacks a or b, with rot or rotrev */
 void	single_rotate(t_push **stack_a, t_push **stack_b, t_push *cheap)
 {
 	while (cheap->cost_a > 0)

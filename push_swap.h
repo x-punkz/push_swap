@@ -15,6 +15,7 @@
 # include "libft/libft.h"
 # include <limits.h>
 
+/* A struct of the type s_push, with the alias t_push */
 typedef struct s_push
 {
 	int				content;

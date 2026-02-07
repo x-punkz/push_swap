@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap_bonus.h"
 
+/* additional functions for the main function */
 void	ps_lstadd_back(t_push **lst, t_push *new)
 {
 	if (!new || !lst)

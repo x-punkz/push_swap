@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-
+/* Move top of list, to next node of last node */
 void	rot_a(t_push **a)
 {
 	t_push	*first;
@@ -48,6 +48,7 @@ void	rot_b(t_push **b)
 	first->next = tmp;
 }
 
+/* Mov both top, to next node of both last node */
 void	rot_ab(t_push **a, t_push **b)
 {
 	if (ps_lstlen(*a) < 2)
@@ -58,6 +59,7 @@ void	rot_ab(t_push **a, t_push **b)
 	rot_b(b);
 }
 
+/* The first node of both nodes is swapped with the second node of the other. */
 void	swap_ss(t_push **a, t_push **b)
 {
 	if (ps_lstlen(*a) < 2)
