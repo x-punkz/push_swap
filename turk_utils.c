@@ -14,7 +14,7 @@
 #include "push_swap.h"
 
 /* Move items from stack A to stack B up to half the stack based on their
-final index, after anyway until 3 items remain.  */
+final index, after, anyway until 3 items remain.  */
 void	move_b(t_push **stack_a, t_push **stack_b, int size)
 {
 	int	i;
